@@ -9,12 +9,21 @@ class Role extends Model
 {
     use HasFactory;
 
-    // Fillable fields to allow mass assignment
-    protected $fillable = ['name', 'description'];
-
-    // Define the many-to-many relationship with User
+    /**
+     * Relationship: A role may belong to many users.
+     */
     public function users()
     {
-        return $this->belongsToMany(User::class, 'role_user', 'role_id', 'user_id');
+        // If you have a custom pivot table, specify the table name here, e.g. 'user_role'
+        return $this->belongsToMany(User::class)->withTimestamps();
+    }
+
+    /**
+     * Relationship: A role may have many permissions.
+     */
+    public function permissions()
+    {
+        // If you have a custom pivot table, specify the table name here, e.g. 'role_permission'
+        return $this->belongsToMany(Permission::class)->withTimestamps();
     }
 }

@@ -9,12 +9,41 @@ class User extends Model
 {
     use HasFactory;
 
-    // Fillable fields to allow mass assignment
-    protected $fillable = ['name', 'email', 'password', 'department', 'service_provider_id'];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'department',
+        'service_provider_id',
+    ];
 
-    // Define the many-to-many relationship with Role
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'password',
+    ];
+
+    /**
+     * Relationship: A user belongs to a service provider.
+     */
+    public function serviceProvider()
+    {
+        return $this->belongsTo(ServiceProvider::class);
+    }
+
+    /**
+     * Relationship: A user may have many roles.
+     */
     public function roles()
     {
-        return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id');
+        return $this->belongsToMany(Role::class);
     }
 }

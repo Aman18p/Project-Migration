@@ -5,19 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Breaklog extends Model
+class LoginReport extends Model
 {
     use HasFactory;
 
-    protected $table = 'breaklog'; // Specify the table name if it's not plural
+    protected $table = 'loginreport'; // Specify the table name if it's not plural
 
     // Specify fillable fields if you're using mass assignment
     protected $fillable = [
         'user_id',
-        'break_date',
-        'break_start_time',
-        'break_end_time',
-        'total_break_minutes',
+        'login_date',
+        'login_time',
+        'logout_time',
+        'total_hours',
     ];
 
     // Define the relationship with the User model
